@@ -11,6 +11,9 @@ import Foundation
 // OAuthSwift errors
 public let OAuthSwiftErrorDomain = "oauthswift.error"
 
+public let OAuth1SwiftOAuthAccessTokenCompletedNotification = "OAuth1SwiftOAuthAccessTokenCompletedNotification"
+public let OAuth1SwiftOAuthAccessTokenResponseParametersKey = "parameters"
+
 public class OAuth1Swift: NSObject {
 
     public var client: OAuthSwiftClient
@@ -118,6 +121,9 @@ public class OAuth1Swift: NSObject {
             let parameters = responseString.parametersFromQueryString()
             self.client.credential.oauth_token = parameters["oauth_token"]!
             self.client.credential.oauth_token_secret = parameters["oauth_token_secret"]!
+
+            // send a notification
+            NSNotificationCenter.defaultCenter().postNotificationName(OAuth1SwiftOAuthAccessTokenCompletedNotification, object: self, userInfo: [OAuth1SwiftOAuthAccessTokenResponseParametersKey: parameters])
             success(credential: self.client.credential, response: response)
         }, failure: failure)
     }
