@@ -98,9 +98,19 @@ public class OAuth1Swift: NSObject {
             data, response in
             let responseString = NSString(data: data, encoding: NSUTF8StringEncoding) as String!
             let parameters = responseString.parametersFromQueryString()
-            self.client.credential.oauth_token = parameters["oauth_token"]!
-            self.client.credential.oauth_token_secret = parameters["oauth_token_secret"]!
-            success(credential: self.client.credential, response: response)
+            let oauthToken = parameters["oauth_token"]
+            let oauthTokenSecret = parameters["oauth_token_secret"]
+            if oauthToken != nil && oauthTokenSecret != nil {
+                self.client.credential.oauth_token = oauthToken!
+                self.client.credential.oauth_token_secret = oauthTokenSecret!
+                success(credential: self.client.credential, response: response)
+            } else {
+                let userInfo = [NSLocalizedFailureReasonErrorKey: NSLocalizedString("Unexpected error, missing oauth_token/oauth_token_secret.", comment: "")]
+                if let failure = failure {
+                    failure(error: NSError(domain: OAuthSwiftErrorDomain, code: -1, userInfo: userInfo))
+                }
+            }
+            
         }, failure: failure)
     }
 
@@ -113,9 +123,18 @@ public class OAuth1Swift: NSObject {
             data, response in
             let responseString = NSString(data: data, encoding: NSUTF8StringEncoding) as String!
             let parameters = responseString.parametersFromQueryString()
-            self.client.credential.oauth_token = parameters["oauth_token"]!
-            self.client.credential.oauth_token_secret = parameters["oauth_token_secret"]!
-            success(credential: self.client.credential, response: response)
+            let oauthToken = parameters["oauth_token"]
+            let oauthTokenSecret = parameters["oauth_token_secret"]
+            if oauthToken != nil && oauthTokenSecret != nil {
+                self.client.credential.oauth_token = oauthToken!
+                self.client.credential.oauth_token_secret = oauthTokenSecret!
+                success(credential: self.client.credential, response: response)
+            } else {
+                let userInfo = [NSLocalizedFailureReasonErrorKey: NSLocalizedString("Unexpected error, missing oauth_token/oauth_token_secret.", comment: "")]
+                if let failure = failure {
+                    failure(error: NSError(domain: OAuthSwiftErrorDomain, code: -1, userInfo: userInfo))
+                }
+            }
         }, failure: failure)
     }
 
