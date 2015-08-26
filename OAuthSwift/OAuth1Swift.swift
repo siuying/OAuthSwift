@@ -143,5 +143,4 @@ public class OAuth1Swift: NSObject {
             userInfo: [CallbackNotification.optionsURLKey: url])
         NSNotificationCenter.defaultCenter().postNotification(notification)
     }
-
 }
