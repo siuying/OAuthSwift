@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		54005EAF1B8E0388005A0C4A /* OAuth1Swift+BrowserFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54005EAE1B8E0388005A0C4A /* OAuth1Swift+BrowserFlow.swift */; settings = {ASSET_TAGS = (); }; };
+		54005EAF1B8E0388005A0C4A /* OAuth1Swift+InternalBrowserFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54005EAE1B8E0388005A0C4A /* OAuth1Swift+InternalBrowserFlow.swift */; settings = {ASSET_TAGS = (); }; };
 		54BA8DAD1B8ECFAC00DFA22A /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54BA8DAC1B8ECFAC00DFA22A /* CommonCrypto.framework */; settings = {ASSET_TAGS = (); }; };
 		54BA8DAF1B8ECFB600DFA22A /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54BA8DAE1B8ECFB600DFA22A /* CommonCrypto.framework */; settings = {ASSET_TAGS = (); }; };
 		54BA8DB11B8ED01800DFA22A /* String+Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BA8DB01B8ED01800DFA22A /* String+Crypto.swift */; settings = {ASSET_TAGS = (); }; };
@@ -99,7 +99,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		54005EAE1B8E0388005A0C4A /* OAuth1Swift+BrowserFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OAuth1Swift+BrowserFlow.swift"; sourceTree = "<group>"; };
+		54005EAE1B8E0388005A0C4A /* OAuth1Swift+InternalBrowserFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OAuth1Swift+InternalBrowserFlow.swift"; sourceTree = "<group>"; };
 		54BA8DAC1B8ECFAC00DFA22A /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = Carthage/Build/iOS/CommonCrypto.framework; sourceTree = SOURCE_ROOT; };
 		54BA8DAE1B8ECFB600DFA22A /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = Carthage/Build/Mac/CommonCrypto.framework; sourceTree = SOURCE_ROOT; };
 		54BA8DB01B8ED01800DFA22A /* String+Crypto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Crypto.swift"; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 			children = (
 				F43502681A6790EC00038A29 /* OAuth1Swift.swift */,
 				F43502691A6790EC00038A29 /* OAuth2Swift.swift */,
-				54005EAE1B8E0388005A0C4A /* OAuth1Swift+BrowserFlow.swift */,
+				54005EAE1B8E0388005A0C4A /* OAuth1Swift+InternalBrowserFlow.swift */,
 				F435026B1A6790EC00038A29 /* OAuthSwiftCredential.swift */,
 				F435026A1A6790EC00038A29 /* OAuthSwiftClient.swift */,
 				F435026C1A6790EC00038A29 /* OAuthSwiftHTTPRequest.swift */,
@@ -504,7 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4E9A4DC1A67944C00B4F3C8 /* OAuth1Swift.swift in Sources */,
-				54005EAF1B8E0388005A0C4A /* OAuth1Swift+BrowserFlow.swift in Sources */,
+				54005EAF1B8E0388005A0C4A /* OAuth1Swift+InternalBrowserFlow.swift in Sources */,
 				F4E9A4DD1A67944C00B4F3C8 /* OAuth2Swift.swift in Sources */,
 				F4805E231A6BB5DD00F7677E /* String+OAuthSwift.swift in Sources */,
 				C49624721B00F54A0010BD09 /* OAuthSwiftURLHandlerType.swift in Sources */,

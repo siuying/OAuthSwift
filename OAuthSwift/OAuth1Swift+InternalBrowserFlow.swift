@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension OAuth1Swift {
+public extension OAuth1Swift {
     public typealias TokenExtendedSuccessHandler = (credential: OAuthSwiftCredential, parameters: [String:AnyObject], response: NSURLResponse) -> Void
 
     public func createAuthorizeURL(callbackURL: NSURL, success: (OAuthSwiftCredential, NSURL) -> Void, failure: FailureHandler?) {
