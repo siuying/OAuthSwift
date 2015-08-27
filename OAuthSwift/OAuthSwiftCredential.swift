@@ -8,24 +8,20 @@
 import Foundation
 
 public class OAuthSwiftCredential: NSObject, NSCoding {
-    
-    var consumer_key: String = String()
-    var consumer_secret: String = String()
-    public var oauth_token: String = String()
-    public var oauth_token_secret: String = String()
-    var oauth_verifier: String = String()
+    public var consumer_key: String!
+    public var consumer_secret: String!
+    public var oauth_token: String?
+    public var oauth_token_secret: String?
+    public var oauth_verifier: String?
     public var oauth2 = false
-    
+
     override init(){
         
     }
+    
     public init(consumer_key: String, consumer_secret: String){
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
-    }
-    public init(oauth_token: String, oauth_token_secret: String){
-        self.oauth_token = oauth_token
-        self.oauth_token_secret = oauth_token_secret
     }
     
     private struct CodingKeys {

@@ -11,20 +11,6 @@ import Foundation
 public class OAuthTwitterCredential : OAuthSwiftCredential {
     public var user_id : String?
     public var screen_name : String?
-
-    override init(){
-        super.init()
-    }
-
-    override public init(consumer_key: String, consumer_secret: String){
-        super.init(consumer_key: consumer_key, consumer_secret: consumer_secret)
-    }
-
-    public init(oauth_token: String, oauth_token_secret: String, screen_name: String, user_id: String){
-        super.init(oauth_token: oauth_token, oauth_token_secret: oauth_token_secret)
-        self.user_id = user_id
-        self.screen_name = screen_name
-    }
     
     private struct CodingKeys {
         static let consumerKey = "ck"

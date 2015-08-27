@@ -47,7 +47,7 @@ public class OAuthTwitter: OAuth1Swift {
                 }
                 
                 if oauthToken != nil && oauthTokenSecret != nil && screenName != nil && userId != nil {
-                    let credential = OAuthTwitterCredential(consumer_key: self.consumer_key, consumer_secret: self.consumer_secret)
+                    let credential = self.client.credential as! OAuthTwitterCredential
                     credential.oauth_token = oauthToken!
                     credential.oauth_token_secret = oauthTokenSecret!
                     credential.screen_name = screenName!

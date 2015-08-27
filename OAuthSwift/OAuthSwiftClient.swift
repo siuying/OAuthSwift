@@ -29,9 +29,9 @@ public class OAuthSwiftClient {
     }
     
     public init(consumerKey: String, consumerSecret: String, accessToken: String, accessTokenSecret: String) {
-        self.credential = OAuthSwiftCredential(oauth_token: accessToken, oauth_token_secret: accessTokenSecret)
-        self.credential.consumer_key = consumerKey
-        self.credential.consumer_secret = consumerSecret
+        self.credential = OAuthSwiftCredential(consumer_key: consumerKey, consumer_secret: consumerSecret)
+        self.credential.oauth_token = accessToken
+        self.credential.oauth_token_secret = accessTokenSecret
     }
     
     public func get(urlString: String, parameters: Dictionary<String, AnyObject>, success: OAuthSwiftHTTPRequest.SuccessHandler?, failure: OAuthSwiftHTTPRequest.FailureHandler?) {
@@ -187,9 +187,7 @@ public class OAuthSwiftClient {
     }
     
     public class func signatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>, credential: OAuthSwiftCredential) -> String {
-        var tokenSecret: NSString = ""
-        tokenSecret = credential.oauth_token_secret.urlEncodedStringWithEncoding(dataEncoding)
-        
+        let tokenSecret = credential.oauth_token_secret != nil ? credential.oauth_token_secret!.urlEncodedStringWithEncoding(dataEncoding) : ""
         let encodedConsumerSecret = credential.consumer_secret.urlEncodedStringWithEncoding(dataEncoding)
         
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
