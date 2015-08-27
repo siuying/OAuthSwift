@@ -38,9 +38,9 @@ public class OAuthSwiftCredential: NSObject, NSCoding {
         self.init()
         self.consumer_key = (decoder.decodeObjectForKey(CodingKeys.consumerKey) as? String) ?? String()
         self.consumer_secret = (decoder.decodeObjectForKey(CodingKeys.consumerSecret) as? String) ?? String()
-        self.oauth_token = (decoder.decodeObjectForKey(CodingKeys.oauthToken) as? String) ?? String()
-        self.oauth_token_secret = (decoder.decodeObjectForKey(CodingKeys.oauthTokenSecret) as? String) ?? String()
-        self.oauth_verifier = (decoder.decodeObjectForKey(CodingKeys.oauthVerifier) as? String) ?? String()
+        self.oauth_token = (decoder.decodeObjectForKey(CodingKeys.oauthToken) as? String)
+        self.oauth_token_secret = (decoder.decodeObjectForKey(CodingKeys.oauthTokenSecret) as? String)
+        self.oauth_verifier = (decoder.decodeObjectForKey(CodingKeys.oauthVerifier) as? String)
     }
     
     public func encodeWithCoder(coder: NSCoder) {

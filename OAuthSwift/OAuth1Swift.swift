@@ -84,7 +84,7 @@ public class OAuth1Swift: NSObject {
                 }
             })
             // 2. Authorize
-            if let queryURL = NSURL(string: self.authorize_url + (self.authorize_url.has("?") ? "&" : "?") + "oauth_token=\(credential.oauth_token)") {
+            if let queryURL = NSURL(string: self.authorize_url + (self.authorize_url.has("?") ? "&" : "?") + "oauth_token=" + credential.oauth_token!) {
                 self.authorize_url_handler.handle(queryURL)
             }
         }, failure: failure)

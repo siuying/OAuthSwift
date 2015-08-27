@@ -60,7 +60,7 @@ public class OAuthSwiftClient {
         
             let request = OAuthSwiftHTTPRequest(URL: url, method: method, parameters: parameters)
             if self.credential.oauth2 {
-                request.headers = ["Authorization": "Bearer \(self.credential.oauth_token)"]
+                request.headers = ["Authorization": "Bearer " + self.credential.oauth_token!]
             } else {
                 request.headers = ["Authorization": OAuthSwiftClient.authorizationHeaderForMethod(method, url: url, parameters: parameters, credential: self.credential)]
             }
@@ -85,7 +85,7 @@ public class OAuthSwiftClient {
         
             let request = OAuthSwiftHTTPRequest(URL: url, method: method, parameters: parameters)
             if self.credential.oauth2 {
-                request.headers = ["Authorization": "Bearer \(self.credential.oauth_token)"]
+                request.headers = ["Authorization": "Bearer " + self.credential.oauth_token!]
             } else {
                 request.headers = ["Authorization": OAuthSwiftClient.authorizationHeaderForMethod(method, url: url, parameters: parameters, credential: self.credential)]
             }
@@ -156,8 +156,8 @@ public class OAuthSwiftClient {
         authorizationParameters["oauth_timestamp"] = String(Int64(NSDate().timeIntervalSince1970))
         authorizationParameters["oauth_nonce"] = (NSUUID().UUIDString as NSString).substringToIndex(8)
         
-        if (credential.oauth_token != ""){
-            authorizationParameters["oauth_token"] = credential.oauth_token
+        if let oauth_token = credential.oauth_token {
+            authorizationParameters["oauth_token"] = oauth_token
         }
         
         for (key, value) in parameters {

@@ -10,7 +10,7 @@ import Foundation
 
 public class OAuthTwitter: OAuth1Swift {
 
-    override init(consumerKey: String, consumerSecret: String, requestTokenUrl: String, authorizeUrl: String, accessTokenUrl: String){
+    public override init(consumerKey: String, consumerSecret: String, requestTokenUrl: String, authorizeUrl: String, accessTokenUrl: String){
         super.init(consumerKey: consumerKey, consumerSecret: consumerSecret, requestTokenUrl: requestTokenUrl, authorizeUrl: authorizeUrl, accessTokenUrl: accessTokenUrl)
         self.client = OAuthSwiftClient(credential: OAuthTwitterCredential(consumer_key: consumerKey, consumer_secret: consumerSecret))
     }
@@ -19,7 +19,7 @@ public class OAuthTwitter: OAuth1Swift {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: {
             token, response in
 
-            let urlString = self.authorize_url + (self.authorize_url.has("?") ? "&" : "?") + "oauth_token=\(token.oauth_token)"
+            let urlString = self.authorize_url + (self.authorize_url.has("?") ? "&" : "?") + "oauth_token=" + token.oauth_token!
             if let queryURL = NSURL(string: urlString) {
                 success(token, queryURL)
             } else {
@@ -31,7 +31,7 @@ public class OAuthTwitter: OAuth1Swift {
     
     public func postOAuthAccessTokenWithRequestToken(requestToken: OAuthSwiftCredential, verifier: String, success: TokenSuccessHandler, failure: FailureHandler?) {
         var parameters : [String:AnyObject] = [:]
-        parameters["oauth_token"] = requestToken.oauth_token
+        parameters["oauth_token"] = requestToken.oauth_token!
         parameters["oauth_verifier"] = verifier
         
         self.client.post(self.access_token_url, parameters: parameters, success: { (data, response) -> Void in
