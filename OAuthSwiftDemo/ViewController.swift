@@ -448,13 +448,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             credential, response, parameters in
             self.showAlertView("Slack", message: "oauth_token:\(credential.oauth_token)")
             }, failure: {(error:NSError!) -> Void in
-                print(error.localizedDescription, appendNewline: false)
+                print(error.localizedDescription, terminator: "")
         })
     }
 
     func snapshot() -> NSData? {
         UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.layer.renderInContext(UIGraphicsGetCurrentContext())
+        self.view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         let fullScreenshot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         UIImageWriteToSavedPhotosAlbum(fullScreenshot, nil, nil, nil)

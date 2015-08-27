@@ -8,12 +8,7 @@
 
 import Foundation
 
-public class OAuthTwitter: OAuth1Swift {
-
-    public override init(consumerKey: String, consumerSecret: String, requestTokenUrl: String, authorizeUrl: String, accessTokenUrl: String){
-        super.init(consumerKey: consumerKey, consumerSecret: consumerSecret, requestTokenUrl: requestTokenUrl, authorizeUrl: authorizeUrl, accessTokenUrl: accessTokenUrl)
-        self.client = OAuthSwiftClient(credential: OAuthTwitterCredential(consumer_key: consumerKey, consumer_secret: consumerSecret))
-    }
+extension OAuth1Swift {
 
     public func createAuthorizeURL(callbackURL: NSURL, success: (OAuthSwiftCredential, NSURL) -> Void, failure: FailureHandler?) {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: {
@@ -43,7 +38,9 @@ public class OAuthTwitter: OAuth1Swift {
                 let userId = parameters["user_id"]
                 
                 if oauthToken != nil && oauthTokenSecret != nil && screenName != nil && userId != nil {
-                    let credential = requestToken as! OAuthTwitterCredential
+                    let credential = OAuthTwitterCredential()
+                    credential.consumer_key = self.client.credential.consumer_key
+                    credential.consumer_secret = self.client.credential.consumer_secret
                     credential.oauth_token = oauthToken!
                     credential.oauth_token_secret = oauthTokenSecret!
                     credential.screen_name = screenName!
