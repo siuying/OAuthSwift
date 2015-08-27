@@ -154,7 +154,7 @@ public class OAuthSwiftClient {
         authorizationParameters["oauth_signature_method"] =  OAuth.signatureMethod
         authorizationParameters["oauth_consumer_key"] = credential.consumer_key
         authorizationParameters["oauth_timestamp"] = String(Int64(NSDate().timeIntervalSince1970))
-        authorizationParameters["oauth_nonce"] = (NSUUID().UUIDString as NSString).substringToIndex(8)
+        authorizationParameters["oauth_nonce"] = NSUUID().UUIDString
         
         if let oauth_token = credential.oauth_token {
             authorizationParameters["oauth_token"] = oauth_token
