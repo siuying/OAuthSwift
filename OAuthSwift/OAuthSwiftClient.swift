@@ -19,7 +19,11 @@ public class OAuthSwiftClient {
     }
     
     private(set) public var credential: OAuthSwiftCredential
-    
+
+    public init(credential: OAuthSwiftCredential) {
+        self.credential = credential
+    }
+
     public init(consumerKey: String, consumerSecret: String) {
         self.credential = OAuthSwiftCredential(consumer_key: consumerKey, consumer_secret: consumerSecret)
     }

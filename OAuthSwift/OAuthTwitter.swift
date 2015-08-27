@@ -9,10 +9,16 @@
 import Foundation
 
 public class OAuthTwitter: OAuth1Swift {
+
+    override init(consumerKey: String, consumerSecret: String, requestTokenUrl: String, authorizeUrl: String, accessTokenUrl: String){
+        super.init(consumerKey: consumerKey, consumerSecret: consumerSecret, requestTokenUrl: requestTokenUrl, authorizeUrl: authorizeUrl, accessTokenUrl: accessTokenUrl)
+        self.client = OAuthSwiftClient(credential: OAuthTwitterCredential(consumer_key: consumerKey, consumer_secret: consumerSecret))
+    }
+
     public func createAuthorizeURL(callbackURL: NSURL, success: (OAuthSwiftCredential, NSURL) -> Void, failure: FailureHandler?) {
         self.postOAuthRequestTokenWithCallbackURL(callbackURL, success: {
             token, response in
-            
+
             let urlString = self.authorize_url + (self.authorize_url.has("?") ? "&" : "?") + "oauth_token=\(token.oauth_token)"
             if let queryURL = NSURL(string: urlString) {
                 success(token, queryURL)
@@ -35,9 +41,18 @@ public class OAuthTwitter: OAuth1Swift {
                 let oauthTokenSecret = parameters["oauth_token_secret"]
                 let screenName = parameters["screen_name"]
                 let userId = parameters["user_id"]
+
+                if (parameters["oauth_verifier"] != nil) {
+                    self.client.credential.oauth_verifier = parameters["oauth_verifier"]!
+                }
+                
                 if oauthToken != nil && oauthTokenSecret != nil && screenName != nil && userId != nil {
-                    let accessToken = OAuthTwitterCredential(oauth_token: oauthToken!, oauth_token_secret: oauthTokenSecret!, screen_name: screenName!, user_id: userId!)
-                    success(credential: accessToken, response: response)
+                    let credential = self.client.credential as! OAuthTwitterCredential
+                    credential.oauth_token = oauthToken!
+                    credential.oauth_token_secret = oauthTokenSecret!
+                    credential.screen_name = screenName!
+                    credential.user_id = userId!
+                    success(credential: credential, response: response)
                 } else {
                     let userInfo = [NSLocalizedFailureReasonErrorKey: NSLocalizedString("missing oauth token in response string =\(responseString)", comment: "")]
                     failure?(error: NSError(domain: OAuthSwiftErrorDomain, code: -1, userInfo: userInfo))
