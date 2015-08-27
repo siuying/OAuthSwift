@@ -9,8 +9,8 @@
 import Foundation
 
 public class OAuthTwitterCredential : OAuthSwiftCredential {
-    var user_id : String?
-    var screen_name : String?
+    public var user_id : String?
+    public var screen_name : String?
 
     override init(){
         super.init()
