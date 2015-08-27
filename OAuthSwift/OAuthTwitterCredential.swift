@@ -27,14 +27,13 @@ public class OAuthTwitterCredential : OAuthSwiftCredential {
     }
     
     private struct CodingKeys {
-        static let base = NSBundle.mainBundle().bundleIdentifier! + "."
-        static let consumerKey = base + "comsumer_key"
-        static let consumerSecret = base + "consumer_secret"
-        static let oauthToken = base + "oauth_token"
-        static let oauthTokenSecret = base + "oauth_token_secret"
-        static let oauthVerifier = base + "oauth_verifier"
-        static let screenName = base + "screen_name"
-        static let userId = base + "user_id"
+        static let consumerKey = "ck"
+        static let consumerSecret = "cs"
+        static let oauthToken = "ot"
+        static let oauthTokenSecret = "ots"
+        static let oauthVerifier = "ov"
+        static let screenName = "sn"
+        static let userId = "ui"
     }
     
     // Cannot declare a required initializer within an extension.

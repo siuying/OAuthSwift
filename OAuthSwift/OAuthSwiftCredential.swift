@@ -29,12 +29,11 @@ public class OAuthSwiftCredential: NSObject, NSCoding {
     }
     
     private struct CodingKeys {
-        static let base = NSBundle.mainBundle().bundleIdentifier! + "."
-        static let consumerKey = base + "comsumer_key"
-        static let consumerSecret = base + "consumer_secret"
-        static let oauthToken = base + "oauth_token"
-        static let oauthTokenSecret = base + "oauth_token_secret"
-        static let oauthVerifier = base + "oauth_verifier"
+        static let consumerKey = "ck"
+        static let consumerSecret = "cs"
+        static let oauthToken = "ot"
+        static let oauthTokenSecret = "ots"
+        static let oauthVerifier = "ov"
     }
     
     // Cannot declare a required initializer within an extension.
