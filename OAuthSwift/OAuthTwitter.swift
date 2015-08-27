@@ -41,23 +41,19 @@ public class OAuthTwitter: OAuth1Swift {
                 let oauthTokenSecret = parameters["oauth_token_secret"]
                 let screenName = parameters["screen_name"]
                 let userId = parameters["user_id"]
-
-                if (parameters["oauth_verifier"] != nil) {
-                    self.client.credential.oauth_verifier = parameters["oauth_verifier"]!
-                }
                 
                 if oauthToken != nil && oauthTokenSecret != nil && screenName != nil && userId != nil {
-                    let credential = self.client.credential as! OAuthTwitterCredential
+                    let credential = requestToken as! OAuthTwitterCredential
                     credential.oauth_token = oauthToken!
                     credential.oauth_token_secret = oauthTokenSecret!
                     credential.screen_name = screenName!
                     credential.user_id = userId!
+                    credential.oauth_verifier = parameters["oauth_verifier"]
                     success(credential: credential, response: response)
                 } else {
                     let userInfo = [NSLocalizedFailureReasonErrorKey: NSLocalizedString("missing oauth token in response string =\(responseString)", comment: "")]
                     failure?(error: NSError(domain: OAuthSwiftErrorDomain, code: -1, userInfo: userInfo))
                 }
-                
             }
         }, failure: failure)
     }
