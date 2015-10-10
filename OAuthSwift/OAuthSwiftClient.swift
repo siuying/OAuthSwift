@@ -187,8 +187,8 @@ public class OAuthSwiftClient {
     }
     
     public class func signatureForMethod(method: String, url: NSURL, parameters: Dictionary<String, AnyObject>, credential: OAuthSwiftCredential) -> String {
-        let tokenSecret = credential.oauth_token_secret != nil ? credential.oauth_token_secret!.urlEncodedStringWithEncoding(dataEncoding) : ""
-        let encodedConsumerSecret = credential.consumer_secret.urlEncodedStringWithEncoding(dataEncoding)
+        let tokenSecret = credential.oauth_token_secret != nil ? credential.oauth_token_secret!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) : ""
+        let encodedConsumerSecret = credential.consumer_secret.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
         
@@ -196,9 +196,9 @@ public class OAuthSwiftClient {
         parameterComponents.sortInPlace { $0 < $1 }
         
         let parameterString = parameterComponents.joinWithSeparator("&")
-        let encodedParameterString = parameterString.urlEncodedStringWithEncoding(dataEncoding)
+        let encodedParameterString = parameterString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         
-        let encodedURL = url.absoluteString.urlEncodedStringWithEncoding(dataEncoding)
+        let encodedURL = url.absoluteString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         let signatureBaseString = "\(method)&\(encodedURL)&\(encodedParameterString)"
         return signatureBaseString.SHA1DigestWithKey(signingKey).base64EncodedStringWithOptions([])
     }
